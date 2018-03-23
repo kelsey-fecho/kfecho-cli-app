@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kelsey Fecho"]
   spec.email         = ["kfecho30@gmail.com"]
 
-  #spec.summary       = %q{TBD}
+  spec.summary       = %q{This gem scrapes web pages for wines.}
   #spec.description   = %q{TBD}
   #spec.homepage      = "www.github.com/kfecho30"
   spec.license       = "MIT"
