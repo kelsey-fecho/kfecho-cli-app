@@ -3,6 +3,7 @@ class WineList
   attr_accessor :wines, :list_type
 
   def initialize
+    @wines = []
     @wines << self
   end
 
