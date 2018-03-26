@@ -28,6 +28,7 @@ class Scraper
       w.link = wine.search(".plp-product-title").attr("href")
       w.category = @winelist.list_type
       w.region = wine.search(".analyticsCountryState").text
+      w.description = wine.search(".winespec-desc-txt").text
       @winelist.add_wine(w)
     end
   end

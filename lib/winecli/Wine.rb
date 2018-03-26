@@ -1,4 +1,4 @@
 class Wine
   #This class creates individual wines
-  attr_accessor :title, :size, :price, :rating, :link, :category, :region
+  attr_accessor :title, :size, :price, :rating, :link, :category, :region, :description
 end

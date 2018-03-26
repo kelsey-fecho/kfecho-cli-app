@@ -101,6 +101,7 @@ class WineOsController
       puts "Size: #{wine.size}"
       puts "Region: #{wine.region}"
       puts "Price: #{wine.price}"
+      puts "Description: #{wine.description}"
       puts "Would you like to buy? Enter 'buy' or 'go back'"
       bgb = gets.strip
       if bgb == 'buy'
