@@ -8,7 +8,7 @@ class WineList
 
   def add_wine(wine)
     @wines << wine
-    @@all << wine
+    @@all << wine if !@@all.include? wine
   end
 
   def self.all

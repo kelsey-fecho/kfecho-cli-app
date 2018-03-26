@@ -53,7 +53,7 @@ class WineOsController
     num = 1
     @list.each do |wine|
       if wine.category == @t[input-1]
-          puts "#{num}. #{wine.title} - #{wine.price}"
+          puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
           num += 1
         end
       end
@@ -70,7 +70,7 @@ class WineOsController
       num = 1
       @list.each do |wine|
         if wine.region == @c[input-1]
-            puts "#{num}. #{wine.title} - #{wine.price}"
+            puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
             num += 1
           end
         end
