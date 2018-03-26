@@ -11,8 +11,8 @@ class WineOsController
   def call
     input = ''
     while input != 'exit'
-      puts "What would you like to do? \n Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
-      input = gets.strip
+      puts "What would you like to do? \n Enter 'list all', 'list by type', 'list by country', or 'list by rating'."
+      input = gets.strip.downcase
       case input
       when "list all"
         list_wines
@@ -21,11 +21,17 @@ class WineOsController
         types
         input2 = gets.strip.to_i
         list_wines_by_type(input2)
-      when "list by region"
+      when "list by country"
+        puts "Alright, let's explore! Choose a region by number:"
+        regions
+        input3 = gets.strip.to_i
+        list_wines_by_region(input3)
       when "list by rating"
       when "exit"
         puts "See you later!"
         break
+      else
+        "Sorry, I'm not sure what you mean. Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
       end
     end
   end
@@ -52,4 +58,21 @@ class WineOsController
         end
       end
     end
+
+    def regions
+      @c = @list.collect{|wine| wine.country}.uniq
+      @c.each.with_index(1) do |a, i|
+        puts "#{i}. #{a}"
+      end
+    end
+
+    def list_wines_by_region(input)
+      num = 1
+      @list.each do |wine|
+        if wine.region == @c[input-1]
+            puts "#{num}. #{wine.title}"
+            num += 1
+          end
+        end
+      end
 end
