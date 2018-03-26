@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["kfecho30@gmail.com"]
 
   spec.summary       = %q{This gem scrapes web pages for wines.}
-  #spec.description   = %q{TBD}
-  #spec.homepage      = "www.github.com/kfecho30"
+  spec.description   = "Using Totalwine.com, this gem returns lists of wines by categories."
+  spec.homepage      = "http://www.github.com/kfecho30"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

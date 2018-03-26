@@ -1,4 +1,4 @@
-
+require_relative "../../config/environment.rb"
 class Scraper
   #This class scrapes a page and returns a WineList object
   attr_accessor :winelist, :doc
