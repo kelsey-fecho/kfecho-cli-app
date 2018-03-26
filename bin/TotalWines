@@ -11,5 +11,4 @@ require "nokogiri"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start(__FILE__)
+WineOsController.new.call

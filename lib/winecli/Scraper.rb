@@ -1,5 +1,6 @@
 require_relative "../../config/environment.rb"
 class Scraper
+  @@all = []
   #This class scrapes a page and returns a WineList object
   attr_accessor :winelist, :doc
   def initialize(url)
@@ -12,6 +13,11 @@ class Scraper
     scrape_details
     scrape_wines
     @winelist #=> This instance should have a bunch of wines and details
+    @@all << @winelist
+  end
+
+  def self.all
+    @@all
   end
 
   def scrape_details
@@ -20,15 +26,13 @@ class Scraper
 
   def scrape_wines
     @doc.search("section.plp-product-content ul.plp-list li").each do |wine|
-      #instantiate the wine
       w = Wine.new
-      #scrape the data
       w.title = wine.search(".plp-product-title").text.strip
       w.size = wine.search(".plp-product-qty").text.strip
       w.price = wine.search("div.plp-product-buy-price-mix span.price").text.strip
       #w.rating =
       w.link = wine.search(".plp-product-title").attr("href")
-      #add wine to WineList
+      w.category = @winelist.list_type
       @winelist.add_wine(w)
     end
   end
