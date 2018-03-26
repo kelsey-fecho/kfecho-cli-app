@@ -11,7 +11,7 @@ class WineOsController
   def call
     input = ''
     while input != 'exit'
-      puts "What would you like to do? \n Enter 'list all', 'list by type', 'list by country', or 'list by rating'."
+      puts "What would you like to do? \n Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
       input = gets.strip.downcase
       case input
       when "list all"
@@ -21,11 +21,15 @@ class WineOsController
         types
         input2 = gets.strip.to_i
         list_wines_by_type(input2)
-      when "list by country"
+        puts "See anything you like? Enter a number to find out more."
+        deets2 = gets.strip_to_i
+      when "list by region"
         puts "Alright, let's explore! Choose a region by number:"
         regions
         input3 = gets.strip.to_i
         list_wines_by_region(input3)
+        puts "See anything you like? Enter a number to find out more."
+        deets3 = gets.strip.to_i
       when "list by rating"
       when "exit"
         puts "See you later!"
@@ -40,6 +44,10 @@ class WineOsController
     @list.each.with_index(1) do |a, i|
       puts "#{i}. #{a.title} - #{a.price} - #{a.rating}"
     end
+    puts "See anything you like? Enter a number to find out more."
+    deets = gets.strip.to_i
+    pick = @list[deets.to_i-1]
+    display_wine(pick)
   end
 
   def types
@@ -51,16 +59,22 @@ class WineOsController
 
   def list_wines_by_type(input)
     num = 1
+    @typelist = []
     @list.each do |wine|
       if wine.category == @t[input-1]
           puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
+          @typelist << wine
           num += 1
-        end
       end
     end
+    puts "See anything you like? Enter a number to find out more."
+    deets = gets.strip.to_i
+    pick = @typelist[deets.to_i-1]
+    display_wine(pick)
+  end
 
     def regions
-      @c = @list.collect{|wine| wine.country}.uniq
+      @c = @list.collect{|wine| wine.region}.uniq
       @c.each.with_index(1) do |a, i|
         puts "#{i}. #{a}"
       end
@@ -68,11 +82,31 @@ class WineOsController
 
     def list_wines_by_region(input)
       num = 1
+      @regionlist = []
       @list.each do |wine|
         if wine.region == @c[input-1]
             puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
             num += 1
+            @regionlist << wine
           end
         end
+        puts "See anything you like? Enter a number to find out more."
+        deets = gets.strip.to_i
+        pick = @regionlist[deets.to_i-1]
+        display_wine(pick)
       end
+
+    def display_wine(wine)
+      puts "Name: #{wine.title}"
+      puts "Size: #{wine.size}"
+      puts "Region: #{wine.region}"
+      puts "Price: #{wine.price}"
+      puts "Would you like to buy? Enter 'buy' or 'go back'"
+      bgb = gets.strip
+      if bgb == 'buy'
+        #system("open #{pick.link}")
+        puts "#{wine.link}"
+      else call
+      end
+    end
 end
