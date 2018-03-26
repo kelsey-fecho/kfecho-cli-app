@@ -27,7 +27,7 @@ class Scraper
       w.size = wine.search(".plp-product-qty").text.strip
       w.price = wine.search("div.plp-product-buy-price-mix span.price").text.strip
       #w.rating =
-      w.link = wine.search(".plp-product-title").attr("href").text.strip
+      w.link = wine.search(".plp-product-title").attr("href")
       #add wine to WineList
       @winelist.add_wine(w)
     end

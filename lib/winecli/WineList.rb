@@ -4,7 +4,10 @@ class WineList
 
   def initialize
     @wines = []
-    #@wines << self
+  end
+
+  def add_wine(wine)
+    @wines << wine
   end
 
 end
