@@ -21,11 +21,13 @@ class Scraper
   def scrape_wines
     @doc.search("section.plp-product-content ul.plp-list li").each do |wine|
       w = Wine.new
+      rating = wine.search("span.stars span").attribute("style").to_s.gsub("width:", "")
+      #g_rating = rating.gsub("width:", "")
+      w.rating = rating
       w.title = wine.search(".plp-product-title").text.strip
       w.size = wine.search(".plp-product-qty").text.strip
       w.price = wine.search("div.plp-product-buy-price-mix span.price").text.strip
-      w.rating = wine.search("span.stars span").attribute("style")
-      w.link = wine.search(".plp-product-title").attr("href")
+      w.link = wine.search(".analyticsProductName").attr("href")
       w.category = @winelist.list_type
       w.region = wine.search(".analyticsCountryState").text
       w.description = wine.search(".winespec-desc-txt").text

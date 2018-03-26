@@ -1,8 +1,8 @@
 class WineOsController
   def initialize
     puts "Hey, wine lover!"
-
     red = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true").scrape
+    white = Scraper.new("http://www.totalwine.com/wine/white-wine/c/000002?viewall=true").scrape
     champ = Scraper.new("http://www.totalwine.com/wine/champagne-sparkling-wine/champagne/c/000162").scrape
     rose = Scraper.new("http://www.totalwine.com/wine/rose-blush-wine/c/000063").scrape
     @list = WineList.all
@@ -31,6 +31,7 @@ class WineOsController
         puts "See anything you like? Enter a number to find out more."
         deets3 = gets.strip.to_i
       when "list by rating"
+        list_wines_by_rating
       when "exit"
         puts "See you later!"
         break
@@ -105,9 +106,16 @@ class WineOsController
       puts "Would you like to buy? Enter 'buy' or 'go back'"
       bgb = gets.strip
       if bgb == 'buy'
-        #system("open #{pick.link}")
+        system("open #{wine.link}")
         puts "#{wine.link}"
       else call
+      end
+    end
+
+    def list_wines_by_rating
+      sorted = @list.sort_by(&:rating)
+      sorted.each.with_index(1) do |a, i|
+        puts "#{i}. #{a.rating} - #{a.title} - #{a.price}"
       end
     end
 end
