@@ -1,6 +1,5 @@
 require_relative "../../config/environment.rb"
 class Scraper
-  @@all = []
   #This class scrapes a page and returns a WineList object
   attr_accessor :winelist, :doc
   def initialize(url)
@@ -13,11 +12,6 @@ class Scraper
     scrape_details
     scrape_wines
     @winelist #=> This instance should have a bunch of wines and details
-    @@all << @winelist
-  end
-
-  def self.all
-    @@all
   end
 
   def scrape_details

@@ -2,8 +2,10 @@ class WineOsController
   def initialize
     puts "Welcome to TotalWines!"
 
-    test = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true")
-    @winelist = test.scrape
+    test = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true").scrape
+    champ = Scraper.new("http://www.totalwine.com/wine/champagne-sparkling-wine/champagne/c/000162").scrape
+    rose = Scraper.new("http://www.totalwine.com/wine/rose-blush-wine/c/000063").scrape
+    @list = WineList.all
   end
 
   def call
@@ -19,7 +21,7 @@ class WineOsController
   end
 
   def list_wines
-    @winelist.wines.each.with_index(1) do |a, i|
+    @list.each.with_index(1) do |a, i|
       puts "#{i}. #{a.title}"
     end
   end
