@@ -23,7 +23,7 @@ class Scraper
       w = Wine.new
       rating = wine.search("span.stars span").attribute("style").to_s.gsub("width:", "")
       #g_rating = rating.gsub("width:", "")
-      w.rating = rating
+      w.rating = rating.to_i
       w.title = wine.search(".plp-product-title").text.strip
       w.size = wine.search(".plp-product-qty").text.strip
       w.price = wine.search("div.plp-product-buy-price-mix span.price").text.strip

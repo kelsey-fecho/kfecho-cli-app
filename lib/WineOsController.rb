@@ -1,6 +1,7 @@
 class WineOsController
   def initialize
     puts "Hey, wine lover!"
+    puts "Give us a second to assemble our wines."
     red = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true").scrape
     white = Scraper.new("http://www.totalwine.com/wine/white-wine/c/000002?viewall=true").scrape
     champ = Scraper.new("http://www.totalwine.com/wine/champagne-sparkling-wine/champagne/c/000162").scrape
@@ -113,7 +114,7 @@ class WineOsController
     end
 
     def list_wines_by_rating
-      sorted = @list.sort_by(&:rating)
+      sorted = @list.sort_by(&:rating).reverse
       sorted.each.with_index(1) do |a, i|
         puts "#{i}. #{a.rating} - #{a.title} - #{a.price}"
       end
