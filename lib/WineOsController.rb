@@ -38,7 +38,7 @@ class WineOsController
 
   def list_wines
     @list.each.with_index(1) do |a, i|
-      puts "#{i}. #{a.title}"
+      puts "#{i}. #{a.title} - #{a.price} - #{a.rating}"
     end
   end
 
@@ -53,7 +53,7 @@ class WineOsController
     num = 1
     @list.each do |wine|
       if wine.category == @t[input-1]
-          puts "#{num}. #{wine.title}"
+          puts "#{num}. #{wine.title} - #{wine.price}"
           num += 1
         end
       end
@@ -70,7 +70,7 @@ class WineOsController
       num = 1
       @list.each do |wine|
         if wine.region == @c[input-1]
-            puts "#{num}. #{wine.title}"
+            puts "#{num}. #{wine.title} - #{wine.price}"
             num += 1
           end
         end
