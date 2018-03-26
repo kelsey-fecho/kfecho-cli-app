@@ -11,4 +11,4 @@ require "nokogiri"
 # require "pry"
 # Pry.start
 
-WineOsController.new.call
+WineCLIController.new.call

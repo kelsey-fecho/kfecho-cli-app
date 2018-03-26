@@ -1,8 +1,6 @@
 # Winecli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/winecli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the WineOs Gem! This gem allows you to browse a selection of wines from TotalWine.com in your CLI, learn more about wines, and purchase wines from TotalWine.com.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This is a great way to browse wines without all the extra fluff. A few lists of wines has been preloaded into the gem. For additional lists of wines from TotalWine.com, use ```Scraper.new(url)``` to build your collection.
 
 ## Development
 

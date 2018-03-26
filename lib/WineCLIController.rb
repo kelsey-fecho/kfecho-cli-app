@@ -1,4 +1,4 @@
-class WineOsController
+class WineCLIController
   def initialize
     puts "Hey, wine lover!"
     puts "Give us a second to assemble our wines."
@@ -44,7 +44,7 @@ class WineOsController
 
   def list_wines
     @list.each.with_index(1) do |a, i|
-      puts "#{i}. #{a.title} - #{a.price} - #{a.rating}"
+      puts "#{i}. #{a.title} - #{a.price} - #{a.rating} Points"
     end
     puts "See anything you like? Enter a number to find out more."
     deets = gets.strip.to_i
@@ -64,7 +64,7 @@ class WineOsController
     @typelist = []
     @list.each do |wine|
       if wine.category == @t[input-1]
-          puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
+          puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating} Points"
           @typelist << wine
           num += 1
       end
@@ -87,7 +87,7 @@ class WineOsController
       @regionlist = []
       @list.each do |wine|
         if wine.region == @c[input-1]
-            puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating}"
+            puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating} Points"
             num += 1
             @regionlist << wine
           end
@@ -105,18 +105,21 @@ class WineOsController
       puts "Price: #{wine.price}"
       puts "Description: #{wine.description}"
       puts "Would you like to buy? Enter 'buy' or 'go back'"
-      bgb = gets.strip
-      if bgb == 'buy'
+      buy = gets.strip
+      if buy == 'buy'
         system("open #{wine.link}")
         puts "#{wine.link}"
-      else call
       end
     end
 
     def list_wines_by_rating
       sorted = @list.sort_by(&:rating).reverse
       sorted.each.with_index(1) do |a, i|
-        puts "#{i}. #{a.rating} - #{a.title} - #{a.price}"
+        puts "#{i}. #{a.rating} Points - #{a.title} - #{a.price}"
       end
+      puts "See anything you like? Enter a number to find out more."
+      deets = gets.strip.to_i
+      pick = sorted[deets.to_i-1]
+      display_wine(pick)
     end
 end
