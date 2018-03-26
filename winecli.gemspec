@@ -1,10 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)"
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "winecli/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "winecli"
-  spec.version       = "1.0.0"
+  spec.version       = Winecli::VERSION
   spec.authors       = ["Kelsey Fecho"]
   spec.email         = ["kfecho30@gmail.com"]
 
