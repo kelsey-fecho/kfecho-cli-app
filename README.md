@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-This is a great way to browse wines without all the extra fluff. A few lists of wines has been preloaded into the gem. For additional lists of wines from TotalWine.com, use ```Scraper.new(url)``` to build your collection.
+This is a great way to browse wines without all the extra fluff. A few lists of wines has been preloaded into the gem. For additional lists of wines from TotalWine.com, use ```Scraper.new(url).scrape``` to build your collection.
 
 ## Development
 

@@ -1,7 +1,7 @@
 class WineCLIController
   def initialize
     puts "Hey, wine lover!"
-    puts "Give us a second to assemble our wines."
+    puts "Give us a second to assemble our favorite wines."
     red = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true").scrape
     white = Scraper.new("http://www.totalwine.com/wine/white-wine/c/000002?viewall=true").scrape
     champ = Scraper.new("http://www.totalwine.com/wine/champagne-sparkling-wine/champagne/c/000162").scrape
@@ -22,22 +22,18 @@ class WineCLIController
         types
         input2 = gets.strip.to_i
         list_wines_by_type(input2)
-        puts "See anything you like? Enter a number to find out more."
-        deets2 = gets.strip_to_i
       when "list by region"
         puts "Alright, let's explore! Choose a region by number:"
         regions
         input3 = gets.strip.to_i
         list_wines_by_region(input3)
-        puts "See anything you like? Enter a number to find out more."
-        deets3 = gets.strip.to_i
       when "list by rating"
         list_wines_by_rating
       when "exit"
         puts "See you later!"
         break
       else
-        "Sorry, I'm not sure what you mean. Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
+        puts "Sorry, I'm not sure what you mean. Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
       end
     end
   end
@@ -47,9 +43,13 @@ class WineCLIController
       puts "#{i}. #{a.title} - #{a.price} - #{a.rating} Points"
     end
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip.to_i
-    pick = @list[deets.to_i-1]
-    display_wine(pick)
+    deets = gets.strip
+    if deets == "exit"
+      puts "Heading back to the menu"
+    else
+      pick = @list[deets.to_i-1]
+      display_wine(pick)
+    end
   end
 
   def types
@@ -70,9 +70,13 @@ class WineCLIController
       end
     end
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip.to_i
-    pick = @typelist[deets.to_i-1]
-    display_wine(pick)
+    deets = gets.strip
+    if deets == "exit"
+      puts "Heading back to the menu"
+    else
+      pick = @typelist[deets.to_i-1]
+      display_wine(pick)
+    end
   end
 
     def regions
@@ -93,9 +97,13 @@ class WineCLIController
           end
         end
         puts "See anything you like? Enter a number to find out more."
-        deets = gets.strip.to_i
-        pick = @regionlist[deets.to_i-1]
-        display_wine(pick)
+        deets = gets.strip
+        if deets == "exit"
+          puts "Heading back to the menu"
+        else
+          pick = @regionlist[deets.to_i-1]
+          display_wine(pick)
+        end
       end
 
     def display_wine(wine)
@@ -118,8 +126,12 @@ class WineCLIController
         puts "#{i}. #{a.rating} Points - #{a.title} - #{a.price}"
       end
       puts "See anything you like? Enter a number to find out more."
-      deets = gets.strip.to_i
-      pick = sorted[deets.to_i-1]
-      display_wine(pick)
+      deets = gets.strip
+      if deets == "exit"
+        puts "Heading back to the menu"
+      else
+        pick = sorted[deets.to_i-1]
+        display_wine(pick)
+      end
     end
 end
