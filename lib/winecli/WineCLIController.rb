@@ -2,6 +2,7 @@ class WineCLIController
   def initialize
     puts "Hey, wine lover!"
     puts "Give us a second to assemble our favorite wines."
+
     red = Scraper.new("http://www.totalwine.com/wine/red-wine/c/000009?viewall=true").scrape
     white = Scraper.new("http://www.totalwine.com/wine/white-wine/c/000002?viewall=true").scrape
     champ = Scraper.new("http://www.totalwine.com/wine/champagne-sparkling-wine/champagne/c/000162").scrape
@@ -42,6 +43,7 @@ class WineCLIController
     @list.each.with_index(1) do |a, i|
       puts "#{i}. #{a.title} - #{a.price} - #{a.rating} Points"
     end
+    
     puts "See anything you like? Enter a number to find out more."
     deets = gets.strip
     if deets == "exit"
@@ -69,6 +71,7 @@ class WineCLIController
           num += 1
       end
     end
+
     puts "See anything you like? Enter a number to find out more."
     deets = gets.strip
     if deets == "exit"
@@ -79,59 +82,62 @@ class WineCLIController
     end
   end
 
-    def regions
-      @c = @list.collect{|wine| wine.region}.uniq
-      @c.each.with_index(1) do |a, i|
-        puts "#{i}. #{a}"
-      end
+  def regions
+    @c = @list.collect{|wine| wine.region}.uniq
+    @c.each.with_index(1) do |a, i|
+      puts "#{i}. #{a}"
     end
+  end
 
-    def list_wines_by_region(input)
-      num = 1
-      @regionlist = []
-      @list.each do |wine|
-        if wine.region == @c[input-1]
-            puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating} Points"
-            num += 1
-            @regionlist << wine
-          end
-        end
-        puts "See anything you like? Enter a number to find out more."
-        deets = gets.strip
-        if deets == "exit"
-          puts "Heading back to the menu"
-        else
-          pick = @regionlist[deets.to_i-1]
-          display_wine(pick)
+  def list_wines_by_region(input)
+    num = 1
+    @regionlist = []
+    @list.each do |wine|
+      if wine.region == @c[input-1]
+          puts "#{num}. #{wine.title} - #{wine.price} - #{wine.rating} Points"
+          num += 1
+          @regionlist << wine
         end
       end
 
-    def display_wine(wine)
-      puts "Name: #{wine.title}"
-      puts "Size: #{wine.size}"
-      puts "Region: #{wine.region}"
-      puts "Price: #{wine.price}"
-      puts "Description: #{wine.description}"
-      puts "Would you like to buy? Enter 'buy' or 'go back'"
-      buy = gets.strip
-      if buy == 'buy'
-        system("open #{wine.link}")
-        puts "#{wine.link}"
-      end
+    puts "See anything you like? Enter a number to find out more."
+    deets = gets.strip
+    if deets == "exit"
+      puts "Heading back to the menu"
+    else
+      pick = @regionlist[deets.to_i-1]
+      display_wine(pick)
+    end
+  end
+
+  def display_wine(wine)
+    puts "Name: #{wine.title}"
+    puts "Size: #{wine.size}"
+    puts "Region: #{wine.region}"
+    puts "Price: #{wine.price}"
+    puts "Description: #{wine.description}"
+
+    puts "Would you like to buy? Enter 'buy' or 'go back'"
+    buy = gets.strip
+    if buy == 'buy'
+      system("open #{wine.link}")
+      puts "#{wine.link}"
+    end
+  end
+
+  def list_wines_by_rating
+    sorted = @list.sort_by(&:rating).reverse
+    sorted.each.with_index(1) do |a, i|
+      puts "#{i}. #{a.rating} Points - #{a.title} - #{a.price}"
     end
 
-    def list_wines_by_rating
-      sorted = @list.sort_by(&:rating).reverse
-      sorted.each.with_index(1) do |a, i|
-        puts "#{i}. #{a.rating} Points - #{a.title} - #{a.price}"
-      end
-      puts "See anything you like? Enter a number to find out more."
-      deets = gets.strip
-      if deets == "exit"
-        puts "Heading back to the menu"
-      else
-        pick = sorted[deets.to_i-1]
-        display_wine(pick)
-      end
+    puts "See anything you like? Enter a number to find out more."
+    deets = gets.strip
+    if deets == "exit"
+      puts "Heading back to the menu"
+    else
+      pick = sorted[deets.to_i-1]
+      display_wine(pick)
     end
+  end
 end
