@@ -14,20 +14,20 @@ class WineCLIController
     input = ''
     while input != 'exit'
       puts "What would you like to do? \n Enter 'list all', 'list by type', 'list by region', or 'list by rating'."
-      input = gets.strip.downcase
-      case input
+      list_variety = gets.strip.downcase
+      case list_variety
       when "list all"
         list_wines
       when "list by type"
         puts "What type of wine are you feeling? Select a number below"
         types
-        input2 = gets.strip.to_i
-        list_wines_by_type(input2)
+        list_by_type_index = gets.strip.to_i
+        list_wines_by_type(list_by_type_index)
       when "list by region"
         puts "Alright, let's explore! Choose a region by number:"
         regions
-        input3 = gets.strip.to_i
-        list_wines_by_region(input3)
+        list_by_region_index = gets.strip.to_i
+        list_wines_by_region(list_by_region_index)
       when "list by rating"
         list_wines_by_rating
       when "exit"
@@ -43,13 +43,13 @@ class WineCLIController
     @list.each.with_index(1) do |a, i|
       puts "#{i}. #{a.title} - #{a.price} - #{a.rating} Points"
     end
-    
+
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip
-    if deets == "exit"
+    wine_detail = gets.strip
+    if wine_detail == "exit"
       puts "Heading back to the menu"
     else
-      pick = @list[deets.to_i-1]
+      pick = @list[wine_detail.to_i-1]
       display_wine(pick)
     end
   end
@@ -73,11 +73,11 @@ class WineCLIController
     end
 
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip
-    if deets == "exit"
+    wine_detail = gets.strip
+    if wine_detail == "exit"
       puts "Heading back to the menu"
     else
-      pick = @typelist[deets.to_i-1]
+      pick = @typelist[wine_detail.to_i-1]
       display_wine(pick)
     end
   end
@@ -101,11 +101,11 @@ class WineCLIController
       end
 
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip
-    if deets == "exit"
+    wine_detail = gets.strip
+    if wine_detail == "exit"
       puts "Heading back to the menu"
     else
-      pick = @regionlist[deets.to_i-1]
+      pick = @regionlist[wine_detail.to_i-1]
       display_wine(pick)
     end
   end
@@ -132,11 +132,11 @@ class WineCLIController
     end
 
     puts "See anything you like? Enter a number to find out more."
-    deets = gets.strip
-    if deets == "exit"
+    wine_detail = gets.strip
+    if wine_detail == "exit"
       puts "Heading back to the menu"
     else
-      pick = sorted[deets.to_i-1]
+      pick = sorted[wine_detail.to_i-1]
       display_wine(pick)
     end
   end
