@@ -1,8 +1,8 @@
 require_relative "winecli/version"
-require_relative "winecli/Scraper"
-require_relative "winecli/WineList"
-require_relative "winecli/Wine"
-require_relative "winecli/WineCLIController.rb"
+require_relative "winecli/scraper"
+require_relative "winecli/winelist"
+require_relative "winecli/wine"
+require_relative "winecli/wine_cli_controller.rb"
 
 module Winecli
   # Your code goes here...
